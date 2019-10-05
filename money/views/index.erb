@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>タイトル</title>
+</head>
+<body>
+<% unless session[:user] %>
+ <a href="/signup">新規登録</a><br>
+ <form action="/signin" method="post">
+<input type="text" name="name" placeholder="パスワード"><br>
+<input type="password" name="password" placeholder="パスワード"><br>
+<input type="submit" value="ログイン"><br>
+</form>
+<h2>未ログイン</h2>
+<% else %>
+<a href="/signout">ログアウト</a>
+<h2><%= User.find(session[:user]).name %>としてログイン</h2>
+<% end %>
+</body>
+</html>

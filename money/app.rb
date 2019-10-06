@@ -67,9 +67,9 @@ get '/posts/:id/edit' do
 end
 
 post '/posts/:id' do
-  post = Post.find(params[:id])
-  @cost = params[:cost]
-  @budget = @budget - @cost
+  @post = Post.find(params[:id],params[:budget])
+  @cost = Post.add(params[:cost])
+  @post = @post - @cost
   post.save
   redirect "/posts/#{post.id}/edit"
 end

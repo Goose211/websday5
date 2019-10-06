@@ -6,13 +6,29 @@ require './models'
 
 enable :sessions
 
+helpers do
+  def current_user
+    User.find_by(id: session[:user])
+  end
+end
+
+before '/posts' do
+  if current_user.nil?
+    redirect '/'
+  end
+end
+
 get '/' do
+if current_user.nil?
+  @posts = Post.none
+else
+  @posts = current_user.posts
+  @budget = params[:budget]
+  @cost = params[:cost]
+end
   erb :index
 end
 
-get '/signin' do
-  erb :sign_in
-end
 
 get '/signup' do
   erb :sign_up
@@ -37,4 +53,23 @@ end
 get '/signout' do
   session[:user] = nil
   redirect '/'
+end
+
+post '/posts' do
+  current_user.posts.create(budget: params[:budget]);
+  redirect '/'
+end
+
+get '/posts/:id/edit' do
+  @post = Post.find(params[:id],params[:budget])
+
+  erb :edit
+end
+
+post '/posts/:id' do
+  post = Post.find(params[:id])
+  @cost = params[:cost]
+  @budget = @budget - @cost
+  post.save
+  redirect "/posts/#{post.id}/edit"
 end

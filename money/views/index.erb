@@ -13,9 +13,32 @@
 <input type="submit" value="ログイン"><br>
 </form>
 <h2>未ログイン</h2>
+
 <% else %>
+
 <a href="/signout">ログアウト</a>
 <h2><%= User.find(session[:user]).name %>としてログイン</h2>
+
+<div>
+  <form action="/posts" method= "post">
+    <div>
+      <div>
+        <input type="integer" name="budget" placeholder="予算"><br>
+      </div>
+    <div>
+      <input type="submit" value="登録">
+    </div>
+    </div>
+  </form>
+</div>
 <% end %>
+
+<% @posts.each do |post| %>
+	<tr>
+		<td><%= post.budget %></td>
+	<tr>
+<td><a href="/posts/<%= post.id %>/edit">編集</a></td>
+<% end %>
+
 </body>
 </html>

@@ -56,20 +56,34 @@ get '/signout' do
 end
 
 post '/posts' do
-  current_user.posts.create(budget: params[:budget]);
+  current_user.posts.create(total: params[:total]);
+
   redirect '/'
 end
 
 get '/posts/:id/edit' do
-  @post = Post.find(params[:id],params[:budget])
+  @post = Post.find(params[:id],params[:total])
 
   erb :edit
 end
 
 post '/posts/:id' do
-  @post = Post.find(params[:id],params[:budget])
-  @cost = Post.add(params[:cost])
-  @post = @post - @cost
+  post = Post.find(params[:id])
+
+  post.cost = params[:cost]
+  post.total = post.total-post.cost
   post.save
   redirect "/posts/#{post.id}/edit"
+end
+
+get '/posts/:id/result' do
+  @post = Post.find(params[:id],params[:total])
+  erb :result
+end
+
+post '/posts/.id/done' do
+  post = POST.find(params[:id])
+  post.completed = true
+  post.save
+  redirect "/"
 end

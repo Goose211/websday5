@@ -23,7 +23,7 @@
   <form action="/posts" method= "post">
     <div>
       <div>
-        <input type="integer" name="budget" placeholder="予算"><br>
+        <input type="integer" name="total" name="budget" placeholder="予算"><br>
       </div>
     <div>
       <input type="submit" value="登録">
@@ -33,12 +33,24 @@
 </div>
 <% end %>
 
+
+
 <% @posts.each do |post| %>
 	<tr>
-		<td><%= post.budget %></td>
+		<td><%= post.total %></td>
 	<tr>
-<td><a href="/posts/<%= post.id %>/edit">編集</a></td>
+
+  <% unless post.completed %>
+  <td><a href="/posts/<%= post.id %>/edit">編集</a></td>
+  <% else %>
+  Done !
+  <% end %>
+
+
 <% end %>
+
+
+
 
 </body>
 </html>

@@ -1,12 +1,17 @@
 
-<h1><%= @post.budget %></h1>
+<h1><%= @post.total %></h1>
+
 <div>
   <form action="/posts/<%= @post.id %>" method="post">
     <div>
       <input type="integer" name="cost" placeholder="コスト"><br>
     </div>
     <div>
-      <input type="submit" value="登録">
+      <input type="submit" value="購入">
     </div>
   </form>
 </div>
+
+<form action="/posts/<%= @post.id %>/result" method="get">
+  <input type="submit" value="結果">
+</form>

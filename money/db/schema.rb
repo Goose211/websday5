@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_05_001411) do
+ActiveRecord::Schema.define(version: 2019_10_07_015946) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "budget"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2019_10_05_001411) do
     t.string "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "completed"
+    t.integer "total"
   end
 
   create_table "users", force: :cascade do |t|

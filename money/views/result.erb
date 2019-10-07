@@ -1,0 +1,5 @@
+<h1><%= @post.total %></h1>
+
+<form action="/posts/<%= @post.id %>/done" method="post">
+  <input type="submit" value="結果">
+</form>

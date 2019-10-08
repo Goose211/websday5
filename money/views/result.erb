@@ -1,5 +1,23 @@
 <h1><%= @post.total %></h1>
 
 <form action="/posts/<%= @post.id %>/done" method="post">
-  <input type="submit" value="結果">
+  <input type="submit" value="Next Day">
 </form>
+
+<div>
+
+
+<% if @post.total =< -100 %>
+  <p>アウトー！</p>
+  <% elsif  -100 =< @post.total && @post.total =< 100 %>
+  <p>おおっ？！</p>
+  <% elsif  100 =< @post.total && @post.total =< 500 %>
+  <p>ファイト！！</p>
+  <% elsif 500 =< @post.total && @post.total =< 1000 %>
+  <p>いい感じ</p>
+   <% elsif 1000 < @post.total %>
+  <p>いい感じ</p>
+<% end %>
+
+
+</div>

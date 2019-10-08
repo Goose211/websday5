@@ -25,6 +25,11 @@ else
   @posts = current_user.posts
   @budget = params[:budget]
   @cost = params[:cost]
+  @plus =  current_user.posts.where(task: 'true').count
+  @minus = current_user.posts.where(task: 'false').count
+  @cost = current_user.posts.all.sum(:cost)
+  @total = current_user.posts.all.sum(:total)
+  @fin = @cost-@total
 end
   erb :index
 end
@@ -57,7 +62,8 @@ end
 
 post '/posts' do
   current_user.posts.create(total: params[:total]);
-
+  #post = Post.find(params[:id]).max
+  #redirect "/posts/#{post.id}/edit"
   redirect '/'
 end
 
@@ -76,13 +82,24 @@ post '/posts/:id' do
   redirect "/posts/#{post.id}/edit"
 end
 
+
 get '/posts/:id/result' do
+
   @post = Post.find(params[:id],params[:total])
+  # 値に応じてコメントが変わる機能
   erb :result
 end
 
-post '/posts/.id/done' do
-  post = POST.find(params[:id])
+
+
+
+post '/posts/:id/done' do
+  post = Post.find(params[:id])
+  if post.total < 0
+  post.task = false
+else
+  post.task = true
+end
   post.completed = true
   post.save
   redirect "/"

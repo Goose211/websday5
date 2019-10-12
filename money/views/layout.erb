@@ -2,12 +2,51 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>タイトル</title>
+  <link rel="stylesheet" href="/assets/css/stylesheet.css">
+  <title>使マネー</title>
 </head>
 
+
 <body>
+
+
+<% unless session[:user] %>
+<div id="header">
+  <div class="container">
+    <a href="/">使マネー</a>
+    <nav>
+      <ul>
+        <li><a href="/signup">新規登録</a><br></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+
+
+<% else %>
+<div id="header">
+  <div class="container">
+    <a href="/">使マネー</a>
+    <nav>
+      <ul>
+        <li><a href="/">Top</a></li>
+        <li><a href="/home"><%= User.find(session[:user]).name %>さん</a></li>
+        <li><a href="/signout">ログアウト</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+
+
+<% end %>
+
+
+
+<main>
 <%= yield %>
+</main>
+
 </body>
-
-
 </html>

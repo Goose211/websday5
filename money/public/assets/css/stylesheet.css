@@ -1,0 +1,39 @@
+
+.content{
+  border-bottom: 1px solid #eee;
+  padding: 16px 0;
+  overflow: hidden;
+}
+
+#header{
+  width: 100%;
+  overflow: hidden;
+  background: #e63c35;
+  padding: 6px 0px;
+}
+
+#header h1{
+  float: left;
+  color: #f9f9f9;
+  margin-right: 48px;
+}
+
+nav{
+  overflow: hidden;
+}
+nav li{
+  list-style-type: none;
+  float: left;
+  margin-top: 2px;
+}
+nav a{
+font-size:  16px;
+display: block;
+text-decoration: none;
+color: #f9f9f9;
+margin: 14px 16px 0px;
+}
+
+nav a:hover{
+  border-bottom: 3px solid #f9f9f9;
+}

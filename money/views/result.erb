@@ -5,19 +5,16 @@
 </form>
 
 <div>
-
-
-<% if @post.total =< -100 %>
-  <p>アウトー！</p>
-  <% elsif  -100 =< @post.total && @post.total =< 100 %>
-  <p>おおっ？！</p>
-  <% elsif  100 =< @post.total && @post.total =< 500 %>
-  <p>ファイト！！</p>
-  <% elsif 500 =< @post.total && @post.total =< 1000 %>
-  <p>いい感じ</p>
-   <% elsif 1000 < @post.total %>
-  <p>いい感じ</p>
+<% if @post.total <= -100 %>
+<p>アウトー！</p>
+<% elsif @post.total <= 100 %>
+<p>おおっ？！</p>
+<% elsif @post.total <= 500 %>
+<p>ファイト！！</p>
+<% elsif @post.total <= 1000 %>
+<p>いい感じ</p>
+<% else %>
+<p>いい感じ</p>
 <% end %>
-
 
 </div>

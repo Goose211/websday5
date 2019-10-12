@@ -1,5 +1,15 @@
 
-<h1><%= @post.total %></h1>
+<% if @post.total <= -100 %>
+<p>アウトー！</p>
+<% elsif @post.total <= 100 %>
+<p>おおっ？！</p>
+<% elsif @post.total <= 500 %>
+<p>ファイト！！</p>
+<% elsif @post.total <= 1000 %>
+<p>いい感じ</p>
+<% else %>
+<p>いい感じ</p>
+<% end %>
 
 <div>
   <form action="/posts/<%= @post.id %>" method="post">

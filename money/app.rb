@@ -34,6 +34,21 @@ end
   erb :index
 end
 
+get '/home' do
+  if current_user.nil?
+  @posts = Post.none
+else
+  @posts = current_user.posts
+  @budget = params[:budget]
+  @cost = params[:cost]
+  @plus =  current_user.posts.where(task: 'true').count
+  @minus = current_user.posts.where(task: 'false').count
+  @cost = current_user.posts.all.sum(:cost)
+  @total = current_user.posts.all.sum(:total)
+  @fin = @cost-@total
+end
+erb :home
+end
 
 get '/signup' do
   erb :sign_up
@@ -62,10 +77,11 @@ end
 
 post '/posts' do
   current_user.posts.create(total: params[:total]);
+
   #post = Post.find(params[:id]).max
-  #redirect "/posts/#{post.id}/edit"
-  redirect '/'
+  redirect "/posts/:it/edit"
 end
+
 
 get '/posts/:id/edit' do
   @post = Post.find(params[:id],params[:total])
@@ -82,16 +98,11 @@ post '/posts/:id' do
   redirect "/posts/#{post.id}/edit"
 end
 
-
 get '/posts/:id/result' do
-
-  @post = Post.find(params[:id],params[:total])
+  @post = Post.find(params[:id])
   # 値に応じてコメントが変わる機能
   erb :result
 end
-
-
-
 
 post '/posts/:id/done' do
   post = Post.find(params[:id])

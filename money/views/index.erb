@@ -3,30 +3,40 @@
 <head>
 	<meta charset="UTF-8">
 	<title>タイトル</title>
+ <script type="text/javascript">
+    function exec() {
+      var date = new Date();
+
+      format_str = 'YYYY-MM-DD hh:mm:ss';
+      format_str = format_str.replace(/YYYY/g, date.getFullYear());
+      format_str = format_str.replace(/MM/g, date.getMonth());
+      format_str = format_str.replace(/DD/g, date.getDate());
+      format_str = format_str.replace(/hh/g, date.getHours());
+      format_str = format_str.replace(/mm/g, date.getMinutes());
+      format_str = format_str.replace(/ss/g, date.getSeconds());
+
+      target = document.getElementById("timeframe");
+      target.innerHTML = format_str;
+    }
+  </script>
+
 </head>
 <body>
 <% unless session[:user] %>
- <a href="/signup">新規登録</a><br>
  <form action="/signin" method="post">
-<input type="text" name="name" placeholder="パスワード"><br>
-<input type="password" name="password" placeholder="パスワード"><br>
-<input type="submit" value="ログイン"><br>
-</form>
-<h2>未ログイン</h2>
+      <input type="text" name="name" placeholder="パスワード"><br>
+      <input type="password" name="password" placeholder="パスワード"><br>
+      <input type="submit" value="ログイン"><br>
+      </form>
 
 <% else %>
 
-<a href="/signout">ログアウト</a>
-<h2><%= User.find(session[:user]).name %>としてログイン</h2>
+<h1>今日の予算を入れてね！</h1>
+<div>現在の時刻:<span id="timeframe"></span></div>
+  <a href="#" onclick="exec();">時刻表示</a>
 
 
-<p>あなたのレベル	<td><%= @plus - @minus %> </td></p>
-<h3>10月1日〜10月31日まで</h3>
-<p>	<td>成功！<%= @plus%> </td></p>
-<p><td>失敗！<%= @minus%> </td></p>
-<p><td>使わなかった金額<%= -@fin%> </td></p>
-<p><td>使う予定だった金額<%= @total%> </td></p>
-<p><td>実際に使った金額<%= @cost%> </td></p>
+
 
 <div>
   <form action="/posts" method= "post">

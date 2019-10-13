@@ -8,7 +8,7 @@
 #header{
   width: 100%;
   overflow: hidden;
-  background: #e63c35;
+  background: #e635;
   padding: 6px 0px;
 }
 
@@ -27,7 +27,7 @@ nav li{
   margin-top: 2px;
 }
 nav a{
-font-size:  16px;
+font-size:  100px;
 display: block;
 text-decoration: none;
 color: #f9f9f9;

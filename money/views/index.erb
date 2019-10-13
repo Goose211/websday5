@@ -3,25 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>タイトル</title>
- <script type="text/javascript">
-    function exec() {
-      var date = new Date();
-
-      format_str = 'YYYY-MM-DD hh:mm:ss';
-      format_str = format_str.replace(/YYYY/g, date.getFullYear());
-      format_str = format_str.replace(/MM/g, date.getMonth());
-      format_str = format_str.replace(/DD/g, date.getDate());
-      format_str = format_str.replace(/hh/g, date.getHours());
-      format_str = format_str.replace(/mm/g, date.getMinutes());
-      format_str = format_str.replace(/ss/g, date.getSeconds());
-
-      target = document.getElementById("timeframe");
-      target.innerHTML = format_str;
-    }
-  </script>
 
 </head>
 <body>
+
 <% unless session[:user] %>
  <form action="/signin" method="post">
       <input type="text" name="name" placeholder="パスワード"><br>
@@ -32,10 +17,7 @@
 <% else %>
 
 <h1>今日の予算を入れてね！</h1>
-<div>現在の時刻:<span id="timeframe"></span></div>
-  <a href="#" onclick="exec();">時刻表示</a>
-
-
+<h1>今日の予算を入れてね！</h1>
 
 
 <div>
@@ -54,21 +36,6 @@
 
 
 
-<% @posts.each do |post| %>
-	<tr>
-		<td><%= post.total %></td>
-    <td><% post.task %></td>
-
-	<tr>
-
-  <% unless post.completed %>
-  <td><a href="/posts/<%= post.id %>/edit">編集</a></td>
-  <% else %>
-  Done !
-  <% end %>
-
-
-<% end %>
 
 
 

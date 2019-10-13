@@ -76,15 +76,17 @@ get '/signout' do
 end
 
 post '/posts' do
-  current_user.posts.create(total: params[:total]);
-
-  #post = Post.find(params[:id]).max
-  redirect "/posts/:it/edit"
+  hi = current_user.posts.create(total: params[:total],budget: params[:budget]);
+  a = hi.id
+  number = []
+  number.push(a)
+  numbers = number.max
+  redirect "/posts/#{numbers}/edit"
 end
 
 
 get '/posts/:id/edit' do
-  @post = Post.find(params[:id],params[:total])
+  @post = Post.find(params[:id])
 
   erb :edit
 end
